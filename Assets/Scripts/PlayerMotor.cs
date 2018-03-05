@@ -12,8 +12,12 @@ public class PlayerMotor : MonoBehaviour {
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
-    private Vector3 camRotation = Vector3.zero;
+    private float camRotationX = 0f;
+    private float currentCamRotationX = 0f;
     private Vector3 flyForce = Vector3.zero;
+
+    [SerializeField]
+    private float cameraRotationLim = 85f;
 
 
     private Rigidbody rb;
@@ -34,9 +38,9 @@ public class PlayerMotor : MonoBehaviour {
         rotation = _rotation;
     }
 
-    public void RotateCamera(Vector3 _camRotation)
+    public void RotateCamera(float _camRotationX)
     {
-        camRotation = _camRotation;
+        camRotationX = _camRotationX;
     }
     //gets vector for flying
     public void UseFly (Vector3 _flyForce)
@@ -69,7 +73,12 @@ public class PlayerMotor : MonoBehaviour {
         rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
         if (cam != null)
         {
-            cam.transform.Rotate(-camRotation);
+            //Set rotation and clamp so cannot rotate upside down
+            currentCamRotationX -= camRotationX;
+            currentCamRotationX = Mathf.Clamp(currentCamRotationX, -cameraRotationLim, cameraRotationLim);
+
+            //apply
+            cam.transform.localEulerAngles = new Vector3(currentCamRotationX, 0f, 0f);
         }
     }
 
