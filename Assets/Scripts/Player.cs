@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class Player : NetworkBehaviour {
 
@@ -31,7 +32,7 @@ public class Player : NetworkBehaviour {
         }
         SetDefaults();
     }
-
+    /*
     void Update()
     {
         if (isLocalPlayer)
@@ -43,7 +44,7 @@ public class Player : NetworkBehaviour {
         }
         
     }
-
+    */
     [ClientRpc]
     public void RpcTakeDamage (int _amount)
     {
@@ -77,6 +78,21 @@ public class Player : NetworkBehaviour {
         Debug.Log(transform.name + " is dead");
 
         //call respawning
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn ()
+    {
+        //directs to the variable within the round setting script
+        yield return new WaitForSeconds(GameManager.gameInstance.roundSettings.respawnTimer);
+
+        SetDefaults();
+        //will return one of the fixed spawn/start points in our game
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
+
+        Debug.Log(transform.name + " respawned.");
     }
 
     public void SetDefaults ()
@@ -91,7 +107,9 @@ public class Player : NetworkBehaviour {
         }
         Collider _col = GetComponent<Collider>();
         if (_col != null)
+        {
             _col.enabled = true;
+        }
     }
 
 }

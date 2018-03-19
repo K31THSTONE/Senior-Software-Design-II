@@ -535,6 +535,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
+--- !u!1001 &1379585121
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304792405422474, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 153828768219143842, guid: cf97de963806c0346b3301641d97eccf,
+        type: 2}
+      propertyPath: m_ConnectedAnchor.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1741624328
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +640,9 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 1
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 1737417540121140, guid: cf97de963806c0346b3301641d97eccf, type: 2}
+  - {fileID: 1470215004729740, guid: 4cd2d414b8af7774cac40f2c46035932, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

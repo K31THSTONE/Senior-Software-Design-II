@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 153828768219143842}
   - component: {fileID: 114217498285659344}
   - component: {fileID: 114121390891008020}
+  - component: {fileID: 320881856053539828}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -812,3 +813,19 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!320 &320881856053539828
+PlayableDirector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1737417540121140}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []

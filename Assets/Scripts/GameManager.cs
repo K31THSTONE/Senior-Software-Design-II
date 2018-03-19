@@ -3,8 +3,21 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-    private const string PLAYER_ID_PREFIX = "Player ";
+    public RoundSettings roundSettings;
+    public static GameManager gameInstance;
 
+    private void Awake()
+    {
+        if (gameInstance != null)
+        {
+            Debug.LogError("more than 1 game in scene");
+        }else
+        {
+            gameInstance = this;
+        }
+    }
+
+    private const string PLAYER_ID_PREFIX = "Player ";
 
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
