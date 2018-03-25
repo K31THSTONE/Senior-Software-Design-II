@@ -4,8 +4,14 @@ using UnityEngine.Networking;
 public class PlayerShoot : NetworkBehaviour {
 
     private const string PLAYER_TAG = "Player";
+    [SerializeField]
+    private PlayerWeapons weapon;
 
-    public PlayerWeapons weapon;
+    [SerializeField]
+    private GameObject weaponGraphics;
+
+    [SerializeField]
+    private string weaponLayername = "Weapon";
 
     [SerializeField]
     private Camera cam;
@@ -21,6 +27,8 @@ public class PlayerShoot : NetworkBehaviour {
             Debug.LogError("PlayerShoot: No cam referenced");
             this.enabled = false;
         }
+
+        weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
     }
 
     void Update()
