@@ -8,6 +8,13 @@ public class PlayerSetup : NetworkBehaviour {
     Behaviour[] disabledComponents;
     [SerializeField]
     string remoteLayerName = "RemotePlayer";
+    [SerializeField]
+    string dontDrawLayer = "DontDraw";
+    [SerializeField]
+    GameObject playerGraphics;
+    [SerializeField]
+    GameObject playerUI;
+    private GameObject playerUIInstance;
 
     Camera sceneCamera;
 
@@ -26,10 +33,26 @@ public class PlayerSetup : NetworkBehaviour {
             {
                 sceneCamera.gameObject.SetActive(false);
             }
+
+            //get rid of local player gui
+            SetRecursiveLayer(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
+            //create playerUI
+            playerUIInstance = Instantiate(playerUI);
+            playerUIInstance.name = playerUI.name;
         }
 
         GetComponent<Player>().Setup();
 
+    }
+
+    void SetRecursiveLayer(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+        {
+            //goes through each child layer down heirarchy
+            SetRecursiveLayer(child.gameObject, newLayer);
+        }
     }
 
     public override void OnStartClient()
@@ -58,6 +81,8 @@ public class PlayerSetup : NetworkBehaviour {
 
     void OnDisable()
     {
+
+        Destroy(playerUIInstance);
         if (sceneCamera != null)
         {
             sceneCamera.gameObject.SetActive(true);

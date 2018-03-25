@@ -81,6 +81,7 @@ public class Player : NetworkBehaviour {
         StartCoroutine(Respawn());
     }
 
+    //coroutine basically for respawning the player
     private IEnumerator Respawn ()
     {
         //directs to the variable within the round setting script
