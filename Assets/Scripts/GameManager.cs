@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
     {
         return players[_playerID];
     }
-
+/*
     void OnGUI()
     {
         GUILayout.BeginArea(new Rect(250, 250, 250, 500));
@@ -51,4 +51,5 @@ public class GameManager : MonoBehaviour {
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
+*/
 }

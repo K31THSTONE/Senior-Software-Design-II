@@ -39,9 +39,10 @@ public class PlayerSetup : NetworkBehaviour {
             //create playerUI
             playerUIInstance = Instantiate(playerUI);
             playerUIInstance.name = playerUI.name;
+            GetComponent<Player>().Setup();
         }
 
-        GetComponent<Player>().Setup();
+
 
     }
 

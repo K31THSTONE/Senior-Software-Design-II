@@ -25,6 +25,18 @@ public class Player : NetworkBehaviour {
 
     public void Setup()
     {
+
+        CmdJoinNewPlayerSetup();
+    }
+
+    private void CmdJoinNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllInstances();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllInstances()
+    {
         wasEnabled = new bool[disableOnDead.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
         {

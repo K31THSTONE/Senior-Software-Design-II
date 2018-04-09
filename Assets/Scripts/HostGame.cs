@@ -28,10 +28,10 @@ public class HostGame : MonoBehaviour {
 
     public void CreateRoom ()
     {
-        if (roomName != "" && roomName != null)
-        {
+       
+        
             Debug.Log("Making room:" + roomName + "with" + roomSize + "players allowed");
             networkManager.matchMaker.CreateMatch(roomName, roomSize, true, "", "", "", 0, 0, networkManager.OnMatchCreate);
-        }
+        
     }
 }
