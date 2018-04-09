@@ -33,6 +33,11 @@ public class PlayerShoot : NetworkBehaviour {
 
     void Update()
     {
+        if (PauseMenu.IsOn)
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();

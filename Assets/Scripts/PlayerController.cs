@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        if (PauseMenu.IsOn)
+        {
+            return;
+        }
+
         //3d movement vector
         float xMov = Input.GetAxisRaw("Horizontal");
         float zMov = Input.GetAxisRaw("Vertical");
