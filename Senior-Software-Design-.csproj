@@ -301,6 +301,7 @@
     <Compile Include="Assets\Scripts\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\PlayerWeapons.cs" />
     <Compile Include="Assets\Scripts\RoundSettings.cs" />
+    <Compile Include="Assets\Scripts\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\WeaponPickup.cs" />
   </ItemGroup>
   <ItemGroup>

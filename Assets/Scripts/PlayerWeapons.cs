@@ -8,56 +8,46 @@ public class PlayerWeapons  {
     public string name;
     public int damage;
     public float range;
-    //public int damage = 10;
-    //public float range = 75f;
 
 
 }
 
 public class Pistol : PlayerWeapons
 {
-    public PlayerWeapons create()
+    public static void initializePistol(PlayerWeapons playerWeapon)
     {
-        PlayerWeapons pistol = new PlayerWeapons();
-        pistol.damage = 10;
-        pistol.range = 75f;
-        pistol.name = "Pistol";
-        return pistol;
+        playerWeapon.damage = 10;
+        playerWeapon.range = 75f;
+        playerWeapon.name = "Pistol";
     }
 }
 
 public class Submachine : PlayerWeapons
 {
-    public PlayerWeapons create()
+    public void initializePistol(PlayerWeapons playerWeapon)
     {
-        PlayerWeapons submachine = new PlayerWeapons();
-        submachine.damage = 5;
-        submachine.range = 55f;
-        submachine.name = "Sub Machine Gun";
-        return submachine;
+        playerWeapon.damage = 8;
+        playerWeapon.range = 55f;
+        playerWeapon.name = "Sub Machine Gun";
     }
 }
 
 public class Sniper : PlayerWeapons
 {
-    public PlayerWeapons create()
+    public void initializePistol(PlayerWeapons playerWeapon)
     {
-        PlayerWeapons sniper = new PlayerWeapons();
-        sniper.damage = 100;
-        sniper.range = 750f;
-        sniper.name = "Sniper";
-        return sniper;
+        playerWeapon.damage = 100;
+        playerWeapon.range = 750f;
+        playerWeapon.name = "Sniper";
     }
 }
 
 public class Shotgun : PlayerWeapons
 {
-    public PlayerWeapons create()
+    public void initializePistol(PlayerWeapons playerWeapon)
     {
-        PlayerWeapons shotgun = new PlayerWeapons();
-        shotgun.damage = 60;
-        shotgun.range = 35f;
-        shotgun.name = "Sawed Off Shotgun";
-        return shotgun;
+        playerWeapon.damage = 60;
+        playerWeapon.range = 35f;
+        playerWeapon.name = "Sawed Off Shotgun";
     }
 }

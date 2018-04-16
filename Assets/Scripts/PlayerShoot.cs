@@ -29,6 +29,7 @@ public class PlayerShoot : NetworkBehaviour {
         }
 
         weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
+        Pistol.initializePistol(weapon);
     }
 
     void Update()
