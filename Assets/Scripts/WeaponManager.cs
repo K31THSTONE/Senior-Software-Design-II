@@ -12,7 +12,7 @@ public class WeaponManager : NetworkBehaviour {
     private PlayerWeapons primaryWeapon;
 
     private PlayerWeapons currentWeapon;
-    //private WeaponGraphics currentGraphics;
+    private WeaponGraphics currentGraphics;
 
     private bool isReloading = false;
 
@@ -29,16 +29,16 @@ public class WeaponManager : NetworkBehaviour {
     
     }
 
-    void EquipWeapon(PlayerWeapons _weapon)
+    public void EquipWeapon(PlayerWeapons _weapon)
     {
         currentWeapon = _weapon;
         //instantiates specific weapon to be held by the player within their hand, hence need for position and rotation
-        GameObject _weaponInstance;// = (GameObject)Instantiate(_weapon.graphics, weaponHolder.position, weaponHolder.rotation);
+        GameObject _weaponInstance = (GameObject)Instantiate(_weapon.getGraphics(), weaponHolder.position, weaponHolder.rotation);
         //will make sure to follow weapon holder around
-        //_weaponInstance.transform.SetParent(weaponHolder);
+        _weaponInstance.transform.SetParent(weaponHolder);
         if (isLocalPlayer)
         {
-            //_weaponInstance.layer = LayerMask.NameToLayer(weaponLayerName);
+            _weaponInstance.layer = LayerMask.NameToLayer(weaponLayerName);
         }
     }
 
@@ -47,21 +47,21 @@ public class WeaponManager : NetworkBehaviour {
         if (isReloading)
             return;
 
-        //StartCoroutine(Reload_Coroutine());
+        StartCoroutine(Reload_Coroutine());
     }
 
-    /*private IEnumerator Reload_Coroutine()
+    private IEnumerator Reload_Coroutine()
     {
         Debug.Log("Reloading..");
         //turn reload variable on
         isReloading = true;
         CmdOnReload();
         //pass in the current weapons reload time, which may differ per gun
-        //yield return new WaitForSeconds(currentWeapon.reloadTime);
-        //currentWeapon.bullets = currentWeapon.maxAmmo;
-        //end reloading
+        yield return new WaitForSeconds(currentWeapon.getReloadTime());
+        currentWeapon.setBullets(currentWeapon.getMaxAmmo());
+        //end reloading;
         isReloading = false;
-    }*/
+    }
 
 
     [Command]
@@ -74,10 +74,10 @@ public class WeaponManager : NetworkBehaviour {
     [ClientRpc]
     void RpcOnReload()
     {
-       /* Animator anim = currentGraphics.GetComponent<Animator>();
+        Animator anim = currentGraphics.GetComponent<Animator>();
         if (anim != null)
         {
             anim.SetTrigger("Reload");
-        }*/
+        }
     }
 }

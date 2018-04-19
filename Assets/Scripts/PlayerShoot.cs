@@ -5,7 +5,7 @@ public class PlayerShoot : NetworkBehaviour {
 
     private const string PLAYER_TAG = "Player";
     [SerializeField]
-    private PlayerWeapons weapon = new Pistol();
+    private PlayerWeapons weapon = new PlayerWeapons();
 
     [SerializeField]
     private GameObject weaponGraphics;
@@ -27,9 +27,8 @@ public class PlayerShoot : NetworkBehaviour {
             Debug.LogError("PlayerShoot: No cam referenced");
             this.enabled = false;
         }
-
-        weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
         Pistol.initializePistol(weapon);
+        weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
     }
 
     void Update()
@@ -49,11 +48,11 @@ public class PlayerShoot : NetworkBehaviour {
     void Shoot ()
     {
         RaycastHit _hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask) )
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.getRng(), mask) )
         {
             if (_hit.collider.tag == PLAYER_TAG)
             {
-                CmdPlayerShot(_hit.collider.name, weapon.damage);
+                CmdPlayerShot(_hit.collider.name, weapon.getDmg());
             }
         }
     }

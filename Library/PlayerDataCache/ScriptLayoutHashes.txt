@@ -21,6 +21,7 @@ c35752b81d25e001fee445da226f3c4e Assembly-CSharp-firstpass.dll:UnityStandardAsse
 0df26d7642d4095bdac77a78b25e44a4 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.BrakeLight
 9202d9f88be6a0e3a91a406fafc0e9d8 Assembly-CSharp.dll:.PlayerMotor
 5068bc7e323c614e8e3c4e61f062de7c Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.SkidTrail
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WeaponPickup
 6ef10f2c9d52b20165b73caa5f02409d Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Aeroplane.AeroplaneUserControl4Axis
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -124,7 +125,7 @@ deb964f6f59c64a5e40dc5dcbe9dd6d5 Assembly-CSharp.dll:.PlayerController
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 be2328572beee817de9838b6bce2f48a Assembly-CSharp.dll:.GameManager
 879b3df2ab67cfd00172f75f85a7a583 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.SimpleMouseRotator
-d6c91249b142d20dfd42f1ea6e64d52c Assembly-CSharp.dll:.PlayerShoot
+64481bc2dbd8b5fcda06d624e1ebb1b9 Assembly-CSharp.dll:.PlayerShoot
 c7790408002dd6c0c359a055959ef579 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Aeroplane.AeroplaneAudio
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -154,6 +155,7 @@ a90e94673f50d2237c1b971c138660c6 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 0f3d832b4eab173f4ea15e0db137bc91 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.CarController
 602eb97b20feedd39c051dee7c2e88de Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.CarAIControl
 787e2b9ae31dffd9c6c22a49250dbd1c Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.CarSelfRighting
+8443c888edea251d3ee960f15c16e1af Assembly-CSharp.dll:.WeaponManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -190,6 +192,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 ac0e5e8ccd6c031d45307738e1b2ad59 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Aeroplane.AeroplaneControlSurfaceAnimator
 74d16288332f6289274f30bd41341cc6 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Car.CarAudio
 6ef10f2c9d52b20165b73caa5f02409d Assembly-CSharp-firstpass.dll:UnityStandardAssets.Vehicles.Aeroplane.AeroplaneUserControl2Axis
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PauseMenu
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 db3b233e35a88802fed1717d19c3d9ec Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FollowTarget
 a8796ecdc9d5c260bbe32f30c4b10708 Assembly-CSharp-firstpass.dll:UnityStandardAssets.CrossPlatformInput.TouchPad
@@ -197,7 +200,7 @@ b7f557c19cce3b6f593e26edfe1ec859 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 0ad469aca31264c6140b1e503c43ab6b Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.TimedObjectDestructor
 3e592d5e5e078e9b570cbefeeb25988f Assembly-CSharp.dll:.JoinGame
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FPSCounter
+24992e548e095fd50f57d9de3106570d Assembly-CSharp.dll:.PlayerUI
 12a92756e650b785da74939e817df125 Assembly-CSharp.dll:.PlayerSetup
 0f3d4bb7128a287827d041c696039525 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.AutoMobileShaderSwitch
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PauseMenu
-24992e548e095fd50f57d9de3106570d Assembly-CSharp.dll:.PlayerUI
+c91907388435fc44aea0d452cf25fcb8 Assembly-CSharp.dll:.WeaponGraphics
