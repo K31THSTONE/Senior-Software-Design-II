@@ -13,7 +13,7 @@ public class WeaponPickup : MonoBehaviour {
         if(_collider.gameObject.tag == "Player"){
             //create playerweapon from gameobject then pass playerweapon object to equip weapon
             WeaponManager weaponManager = GetComponent<WeaponManager>();
-            PlayerWeapons weapon = new PlayerWeapons();
+            PlayerWeapons weapon = new Submachine();
             weapon.initializeSubmachine();
             weaponManager.EquipWeapon(weapon);
         }

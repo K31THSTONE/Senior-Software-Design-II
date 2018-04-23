@@ -5,7 +5,7 @@ public class PlayerShoot : NetworkBehaviour {
 
     private const string PLAYER_TAG = "Player";
     [SerializeField]
-    private PlayerWeapons weapon = new PlayerWeapons();
+    private PlayerWeapons weapon = new Pistol();
 
     [SerializeField]
     private GameObject weaponGraphics;
