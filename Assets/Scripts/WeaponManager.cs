@@ -19,7 +19,7 @@ public class WeaponManager : NetworkBehaviour {
     void Start()
     {
         //will find current primary and place
-        Pistol.initializePistol(primaryWeapon);
+        primaryWeapon.initializePistol();
         EquipWeapon(primaryWeapon);
     }
 

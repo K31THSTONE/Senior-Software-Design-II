@@ -2,7 +2,8 @@
 [System.Serializable]
 
 
-public class PlayerWeapons  {
+public class PlayerWeapons
+{
 
 
     public string name;
@@ -70,7 +71,7 @@ public class PlayerWeapons  {
     }
     public void setFireRate(float fireRate)
     {
-        this.fireRate= fireRate;
+        this.fireRate = fireRate;
     }
     public void setClipSize(int clipSize)
     {
@@ -92,50 +93,56 @@ public class PlayerWeapons  {
     {
         this.graphics = graphics;
     }
-	public static void initializePistol(){
-		this.setName("Pistol");
-		this.setDmg(10);
-		this.setRng(75f);
-		this.setFireRate(0f);
-		this.setBullets(80);
-		this.setReloadTime(0f);
-		//this.setGraphics();
-		this.setClipSize(8);
-		this.setMaxAmmo(80);
-	}
-	public static void initializeSubmachine(){
-		this.setName("Sub Machine Gun");
-		this.setDmg(5);
-		this.setRng(55f);
-		this.setFireRate(2f);
-		this.setBullets(150);
-		this.setReloadTime(2f);
-		//this.setGraphics();
-		this.setClipSize(30);
-		this.setMaxAmmo(150);
-	}
-	public static void initializeSniper(){
-		this.setName("Sniper");
-		this.setDmg(100);
-		this.setRng(750f);
-		this.setFireRate(0f);
-		this.setBullets(10);
-		this.setReloadTime(5f);
-		//this.setGraphics();
-		this.setClipSize(1);
-		this.setMaxAmmo(10);
-	}
-	public static void initializeShotgun(){
-		this.setName("Sawed Off Shotgun");
-		this.setDmg(80);
-		this.setRng(35f);
-		this.setFireRate(0f);
-		this.setBullets(30);
-		this.setReloadTime(5f);
-		//this.setGraphics();
-		this.setClipSize(2);
-		this.setMaxAmmo(30);
-	}
+    public void initializePistol()
+    {
+        this.setName("Pistol");
+        this.setDmg(10);
+        this.setRng(75f);
+        this.setFireRate(0f);
+        this.setBullets(80);
+        this.setReloadTime(0f);
+        //this.setGraphics();
+        this.setClipSize(8);
+        this.setMaxAmmo(80);
+    }
+    public void initializeSubmachine()
+    {
+        this.setName("Sub Machine Gun");
+        this.setDmg(5);
+        this.setRng(55f);
+        this.setFireRate(2f);
+        this.setBullets(150);
+        this.setReloadTime(2f);
+        //this.setGraphics();
+        this.setClipSize(30);
+        this.setMaxAmmo(150);
+    }
+    public void initializeSniper()
+    {
+        this.setName("Sniper");
+        this.setDmg(100);
+        this.setRng(750f);
+        this.setFireRate(0f);
+        this.setBullets(10);
+        this.setReloadTime(5f);
+        //this.setGraphics();
+        this.setClipSize(1);
+        this.setMaxAmmo(10);
+    }
+    public void initializeShotgun()
+    {
+        this.setName("Sawed Off Shotgun");
+        this.setDmg(80);
+        this.setRng(35f);
+        this.setFireRate(0f);
+        this.setBullets(30);
+        this.setReloadTime(5f);
+        //this.setGraphics();
+        this.setClipSize(2);
+        this.setMaxAmmo(30);
+    }
+}
+
 public class Pistol : PlayerWeapons
 {
   

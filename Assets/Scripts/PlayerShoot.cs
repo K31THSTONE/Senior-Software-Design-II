@@ -27,7 +27,7 @@ public class PlayerShoot : NetworkBehaviour {
             Debug.LogError("PlayerShoot: No cam referenced");
             this.enabled = false;
         }
-        Pistol.initializePistol(weapon);
+        weapon.initializePistol();
         weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
     }
 
