@@ -76,6 +76,29 @@ public class PlayerController : MonoBehaviour {
 	//PlayerShootMethods
 	void Start ()
     {
+		//PlayerSetupStart
+		if (!isLocalPlayer)
+        {
+            DisableComponents();
+            AssignRemoteLayer();
+        }
+        else
+        {
+            sceneCamera = Camera.main;
+            if (sceneCamera != null)
+            {
+                sceneCamera.gameObject.SetActive(false);
+            }
+
+            //get rid of local player gui
+            SetRecursiveLayer(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
+            //create playerUI
+            playerUIInstance = Instantiate(playerUI);
+            playerUIInstance.name = playerUI.name;
+            GetComponent<Player>().Setup();
+        }
+		
+		//PlayerShootStart
         if (cam == null)
         {
             Debug.LogError("PlayerShoot: No cam referenced");
@@ -83,10 +106,20 @@ public class PlayerController : MonoBehaviour {
         }
         Pistol.initializePistol(weapon);
         weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
+		
+		//PlayerMotorStart
+		rb = GetComponent<Rigidbody>();
+		
+		//PlayerControllerStart
+		motor = GetComponent<PlayerMotor>();
+        joint = GetComponent<ConfigurableJoint>();
+
+        SetJointSettings(jointJump);
     }
 
     void Update()
     {
+		//PlayerShootUpdate
         if (PauseMenu.IsOn)
         {
             return;
@@ -96,6 +129,46 @@ public class PlayerController : MonoBehaviour {
         {
             Shoot();
         }
+		
+		//PlayerControllerUpdate
+		//3d movement vector
+        float xMov = Input.GetAxisRaw("Horizontal");
+        float zMov = Input.GetAxisRaw("Vertical");
+
+        Vector3 movHorizontal = transform.right * xMov;
+        Vector3 movVertical = transform.forward * zMov;
+
+        Vector3 _velocity = (movHorizontal + movVertical).normalized * speed;
+
+        motor.Move(_velocity);
+
+        //rotation calc to turn around
+        float yRot = Input.GetAxisRaw("Mouse X");
+
+        Vector3 _rotation = new Vector3(0f, yRot, 0f) * lookSens;
+
+        motor.Rotate(_rotation);
+
+
+        float xRot = Input.GetAxisRaw("Mouse Y");
+
+        float _camRotationX = xRot * lookSens;
+
+        motor.RotateCamera(_camRotationX);
+
+        Vector3 _flyForce = Vector3.zero;
+
+        //jump force
+        if (Input.GetButton("Jump"))
+        {
+            _flyForce = Vector3.up * flyForce;
+            SetJointSettings(0f);
+        }else
+        {
+            SetJointSettings(jointJump);
+        }
+
+        motor.UseFly(_flyForce);
     }
 
     [Client]
@@ -120,33 +193,6 @@ public class PlayerController : MonoBehaviour {
         _player.RpcTakeDamage(_damage);
     }
 	//PlayerSetupMethods
-	void Start()
-    {
-        if (!isLocalPlayer)
-        {
-            DisableComponents();
-            AssignRemoteLayer();
-        }
-        else
-        {
-            sceneCamera = Camera.main;
-            if (sceneCamera != null)
-            {
-                sceneCamera.gameObject.SetActive(false);
-            }
-
-            //get rid of local player gui
-            SetRecursiveLayer(playerGraphics, LayerMask.NameToLayer(dontDrawLayer));
-            //create playerUI
-            playerUIInstance = Instantiate(playerUI);
-            playerUIInstance.name = playerUI.name;
-            GetComponent<Player>().Setup();
-        }
-
-
-
-    }
-
     void SetRecursiveLayer(GameObject obj, int newLayer)
     {
         obj.layer = newLayer;
@@ -193,12 +239,6 @@ public class PlayerController : MonoBehaviour {
         GameManager.UnregisterPlayer(transform.name);
     }
 	//PlayerMotorMethods
-	void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        
-    }
-
     public void Move (Vector3 _velocity)
     {
         velocity = _velocity;
@@ -256,62 +296,6 @@ public class PlayerController : MonoBehaviour {
 
 }
 	//PlayerControllerMethods
-    private void Start()
-    {
-        motor = GetComponent<PlayerMotor>();
-        joint = GetComponent<ConfigurableJoint>();
-
-        SetJointSettings(jointJump);
-
-    }
-
-    private void Update()
-    {
-        if (PauseMenu.IsOn)
-        {
-            return;
-        }
-
-        //3d movement vector
-        float xMov = Input.GetAxisRaw("Horizontal");
-        float zMov = Input.GetAxisRaw("Vertical");
-
-        Vector3 movHorizontal = transform.right * xMov;
-        Vector3 movVertical = transform.forward * zMov;
-
-        Vector3 _velocity = (movHorizontal + movVertical).normalized * speed;
-
-        motor.Move(_velocity);
-
-        //rotation calc to turn around
-        float yRot = Input.GetAxisRaw("Mouse X");
-
-        Vector3 _rotation = new Vector3(0f, yRot, 0f) * lookSens;
-
-        motor.Rotate(_rotation);
-
-
-        float xRot = Input.GetAxisRaw("Mouse Y");
-
-        float _camRotationX = xRot * lookSens;
-
-        motor.RotateCamera(_camRotationX);
-
-        Vector3 _flyForce = Vector3.zero;
-
-        //jump force
-        if (Input.GetButton("Jump"))
-        {
-            _flyForce = Vector3.up * flyForce;
-            SetJointSettings(0f);
-        }else
-        {
-            SetJointSettings(jointJump);
-        }
-
-        motor.UseFly(_flyForce);
-    }
-
     private void SetJointSettings (float _jointSpring)
     {
         joint.yDrive = new JointDrive {positionSpring = jointJump, maximumForce = jointForceMax };
