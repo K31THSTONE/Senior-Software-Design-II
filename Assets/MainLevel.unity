@@ -683,11 +683,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ebea171205acc842b8da90a05a8842e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1589943011 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1987397584503762, guid: 3ebea171205acc842b8da90a05a8842e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1513654351}
 --- !u!4 &1589943012 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4894377423980992, guid: 3ebea171205acc842b8da90a05a8842e,
@@ -735,8 +730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b0eed09b7706449b99b06eded98313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myWeapon: {fileID: 1837622273}
-  weaponOnGround: {fileID: 1589943011}
 --- !u!54 &1620563557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -832,11 +825,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 64, y: 1.0000104, z: 64}
   m_Center: {x: 0, y: -0.5000052, z: 0}
---- !u!1 &1837622273 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1929936813253794, guid: 5b3772f506f36fb4c9a362f407053191,
-    type: 2}
-  m_PrefabInternal: {fileID: 277062594}
 --- !u!1001 &1938721794
 Prefab:
   m_ObjectHideFlags: 0
