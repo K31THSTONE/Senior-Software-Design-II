@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-[RequireComponent(typeof(PlayerMotor))]
+//[RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(ConfigurableJoint))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Player))]
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 	
 	//PlayerShootFields
 	 private const string PLAYER_TAG = "Player";
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 	
 	//PlayerMotorFields
 	[SerializeField]
-    private Camera cam;
+    private Camera camMotor;
 
 
     private Vector3 velocity = Vector3.zero;
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float lookSens = 3f;
     [SerializeField]
-    private float flyForce = 750f;
+    private float flyForceController = 750f;
 
     [Header("jump settings:")]
     [SerializeField]
@@ -73,8 +76,15 @@ public class PlayerController : MonoBehaviour {
 
     private PlayerMotor motor;
     private ConfigurableJoint joint;
-	//PlayerShootMethods
-	void Start ()
+
+    //PlayerControllerMethods
+    private void SetJointSettings(float _jointSpring)
+    {
+        joint.yDrive = new JointDrive { positionSpring = jointJump, maximumForce = jointForceMax };
+    }
+
+    //PlayerShootMethods
+    void Start ()
     {
 		//PlayerSetupStart
 		if (!isLocalPlayer)
@@ -104,14 +114,14 @@ public class PlayerController : MonoBehaviour {
             Debug.LogError("PlayerShoot: No cam referenced");
             this.enabled = false;
         }
-        Pistol.initializePistol(weapon);
+        weapon.initializePistol();
         weaponGraphics.layer = LayerMask.NameToLayer(weaponLayername);
 		
 		//PlayerMotorStart
 		rb = GetComponent<Rigidbody>();
 		
 		//PlayerControllerStart
-		motor = GetComponent<PlayerMotor>();
+		//motor = GetComponent<PlayerMotor>();
         joint = GetComponent<ConfigurableJoint>();
 
         SetJointSettings(jointJump);
@@ -140,35 +150,35 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 _velocity = (movHorizontal + movVertical).normalized * speed;
 
-        motor.Move(_velocity);
+        this.Move(_velocity);
 
         //rotation calc to turn around
         float yRot = Input.GetAxisRaw("Mouse X");
 
         Vector3 _rotation = new Vector3(0f, yRot, 0f) * lookSens;
 
-        motor.Rotate(_rotation);
+        this.Rotate(_rotation);
 
 
         float xRot = Input.GetAxisRaw("Mouse Y");
 
         float _camRotationX = xRot * lookSens;
 
-        motor.RotateCamera(_camRotationX);
+        this.RotateCamera(_camRotationX);
 
         Vector3 _flyForce = Vector3.zero;
 
         //jump force
         if (Input.GetButton("Jump"))
         {
-            _flyForce = Vector3.up * flyForce;
+            _flyForce = Vector3.up * flyForceController;
             SetJointSettings(0f);
         }else
         {
             SetJointSettings(jointJump);
         }
 
-        motor.UseFly(_flyForce);
+        this.UseFly(_flyForce);
     }
 
     [Client]
@@ -291,13 +301,5 @@ public class PlayerController : MonoBehaviour {
             //apply
             cam.transform.localEulerAngles = new Vector3(currentCamRotationX, 0f, 0f);
         }
-    }
-
-
-}
-	//PlayerControllerMethods
-    private void SetJointSettings (float _jointSpring)
-    {
-        joint.yDrive = new JointDrive {positionSpring = jointJump, maximumForce = jointForceMax };
     }
 }
