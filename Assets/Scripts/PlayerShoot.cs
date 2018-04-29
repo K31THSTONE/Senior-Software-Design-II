@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerShoot : NetworkBehaviour {
@@ -66,4 +66,4 @@ public class PlayerShoot : NetworkBehaviour {
         _player.RpcTakeDamage(_damage);
     }
 
-}
+}*/

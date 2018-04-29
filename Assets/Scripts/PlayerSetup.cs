@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Player))]
@@ -93,4 +93,4 @@ public class PlayerSetup : NetworkBehaviour {
     }
 
 
-}
+}*/

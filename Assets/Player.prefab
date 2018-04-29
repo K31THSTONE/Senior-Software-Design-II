@@ -171,15 +171,12 @@ GameObject:
   - component: {fileID: 4304792405422474}
   - component: {fileID: 135517486260029658}
   - component: {fileID: 54041956046901600}
-  - component: {fileID: 114133982407042878}
   - component: {fileID: 114783828353023344}
   - component: {fileID: 114713986392197982}
-  - component: {fileID: 114042856108661180}
   - component: {fileID: 81648242852819406}
   - component: {fileID: 114286239890673096}
   - component: {fileID: 114376229668966890}
   - component: {fileID: 153828768219143842}
-  - component: {fileID: 114217498285659344}
   - component: {fileID: 114121390891008020}
   - component: {fileID: 320881856053539828}
   m_Layer: 8
@@ -303,7 +300,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1737417540121140}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.7184448, y: 1, z: 1.4447714}
+  m_LocalPosition: {x: -5.307907, y: 1.44, z: 2.8065162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4231387899782426}
@@ -874,27 +871,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1913951159993128}
   m_Enabled: 0
---- !u!114 &114042856108661180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1737417540121140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c820068f90d3eb54989b9fd9ac6cd814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disabledComponents:
-  - {fileID: 114133982407042878}
-  - {fileID: 114783828353023344}
-  - {fileID: 20729713434260168}
-  - {fileID: 114217498285659344}
-  - {fileID: 20962045495758358}
-  remoteLayerName: RemotePlayer
-  dontDrawLayer: DontDraw
-  playerGraphics: {fileID: 1775923301919894}
-  playerUI: {fileID: 1415104432273110, guid: 383be91bef77cca46a15811a5d6be544, type: 2}
 --- !u!114 &114121390891008020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,41 +885,6 @@ MonoBehaviour:
   maxHp: 100
   disableOnDead:
   - {fileID: 114783828353023344}
-  - {fileID: 114217498285659344}
---- !u!114 &114133982407042878
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1737417540121140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28a475815d24a314d8c7a793a0e4a580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 20729713434260168}
-  cameraRotationLim: 85
---- !u!114 &114217498285659344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1737417540121140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7793fe4316b6454fb8ed49e43779c0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon:
-    name: pistol
-    damage: 25
-    range: 75
-  weaponGraphics: {fileID: 1775832452875916}
-  weaponLayername: Weapon
-  cam: {fileID: 20729713434260168}
-  mask:
-    serializedVersion: 2
-    m_Bits: 4294967039
 --- !u!114 &114286239890673096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1027,9 +968,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f538541b413564aba3c081a26bf15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon:
+    name: Pistol
+    damage: 25
+    range: 75
+    fireRate: 0
+    maxAmmo: 80
+    clipSize: 8
+    bullets: 80
+    reloadTime: 0
+    graphics: {fileID: 0}
+  weaponGraphics: {fileID: 1775832452875916}
+  weaponLayername: Weapon
+  cam: {fileID: 20729713434260168}
+  mask:
+    serializedVersion: 2
+    m_Bits: 3639
+  disabledComponents:
+  - {fileID: 20962045495758358}
+  - {fileID: 114783828353023344}
+  - {fileID: 20729713434260168}
+  remoteLayerName: RemotePlayer
+  dontDrawLayer: DontDraw
+  playerGraphics: {fileID: 1775923301919894}
+  playerUI: {fileID: 1415104432273110, guid: 383be91bef77cca46a15811a5d6be544, type: 2}
+  camMotor: {fileID: 20729713434260168}
+  cameraRotationLim: 85
   speed: 5
   lookSens: 4
-  flyForce: 1500
+  flyForceController: 750
   jointJump: 20
   jointForceMax: 1000
 --- !u!124 &124521947593392470
@@ -1061,7 +1028,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -3.7184448, y: 1, z: 1.4447714}
+  m_ConnectedAnchor: {x: -5.307907, y: 1.44, z: 2.8065162}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2

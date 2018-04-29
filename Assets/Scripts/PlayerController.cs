@@ -74,7 +74,7 @@ public class PlayerController : NetworkBehaviour {
     private float jointForceMax = 1000f;
 
 
-    private PlayerMotor motor;
+    //private PlayerMotor motor;
     private ConfigurableJoint joint;
 
     //PlayerControllerMethods
