@@ -6,6 +6,7 @@ public class Player : NetworkBehaviour {
 
 
     private bool _isDead = false;
+	public int deaths = 0;
     public bool isDead
     {
         get { return _isDead; }
@@ -71,6 +72,7 @@ public class Player : NetworkBehaviour {
         if (currentHp <= 0)
         {
             Die();
+			deaths++;
         }
     }
     private void Die()
