@@ -6,7 +6,10 @@ public class Player : NetworkBehaviour {
 
 
     private bool _isDead = false;
+
+    [SyncVar]
 	public int deaths = 0;
+
     public bool isDead
     {
         get { return _isDead; }
@@ -73,6 +76,11 @@ public class Player : NetworkBehaviour {
         {
             Die();
 			deaths++;
+            if(deaths == 10)
+            {
+                //end of game routine
+                Debug.Log(transform.name + "has lost");
+            }
         }
     }
     private void Die()
