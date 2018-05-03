@@ -158,7 +158,8 @@ public class PlayerController : NetworkBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            string name = this.playerUIInstance.name;
+            Shoot(name);
         }
 
         //should correct physics when landing on objects around map or going over
@@ -224,25 +225,33 @@ public class PlayerController : NetworkBehaviour {
     }
 
     [Client]
-    void Shoot ()
+    void Shoot (string name)
     {
         RaycastHit _hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.getRng(), mask) )
         {
             if (_hit.collider.tag == PLAYER_TAG)
             {
-                CmdPlayerShot(_hit.collider.name, weapon.getDmg());
+                CmdPlayerShot(name, _hit.collider.name, weapon.getDmg());
             }
         }
     }
 
     [Command]
-    void CmdPlayerShot (string _playerID, int _damage)
+    void CmdPlayerShot (string shot, string _playerID, int _damage)
     {
         Debug.Log(_playerID + "has been shot");
 
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
+        if(_player.dead == true)
+        {
+            shot.kills++;
+        }
+        else if(_player.lost == true)
+        {
+            Debug.log(shot.name + "has Won");
+        }
     }
 	//PlayerSetupMethods
     void SetRecursiveLayer(GameObject obj, int newLayer)

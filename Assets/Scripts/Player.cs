@@ -11,6 +11,7 @@ public class Player : NetworkBehaviour {
 
     [SyncVar]
 	public int deaths = 0;
+    public int kills = 0;
 
     public bool isDead
     {
