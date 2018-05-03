@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Collections;
 
@@ -6,6 +7,7 @@ public class Player : NetworkBehaviour {
 
 
     private bool _isDead = false;
+    public bool lost = false;
 
     [SyncVar]
 	public int deaths = 0;
@@ -74,12 +76,18 @@ public class Player : NetworkBehaviour {
 
         if (currentHp <= 0)
         {
-            Die();
-			deaths++;
-            if(deaths == 10)
+            deaths++;
+            if (deaths == 1)
             {
                 //end of game routine
                 Debug.Log(transform.name + "has lost");
+                lost = true;
+                this.endGame();
+
+            }
+            else
+            {
+                Die();
             }
         }
     }
@@ -135,6 +143,14 @@ public class Player : NetworkBehaviour {
         if (_col != null)
         {
             _col.enabled = true;
+        }
+    }
+
+    public void endGame()
+    {
+        if(this.lost == true)
+        {
+            SceneManager.LoadScene("LobbyScene");
         }
     }
 
