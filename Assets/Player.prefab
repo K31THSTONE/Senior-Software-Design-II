@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22aa88c6458a1ef47857e9629d5f7c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deaths: 0
   maxHp: 100
   disableOnDead:
   - {fileID: 114783828353023344}
@@ -997,8 +998,10 @@ MonoBehaviour:
   speed: 5
   lookSens: 4
   flyForceController: 750
-  jointJump: 20
-  jointForceMax: 1000
+  thrusterFuelBurnSpeed: 0.8
+  thrusterRegenSpd: 0.4
+  jointJump: 15
+  jointForceMax: 3000
 --- !u!124 &124521947593392470
 Behaviour:
   m_ObjectHideFlags: 1

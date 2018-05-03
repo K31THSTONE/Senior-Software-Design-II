@@ -65,7 +65,17 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField]
     private float lookSens = 3f;
     [SerializeField]
-    private float flyForceController = 750f;
+    private float flyForceController = 1000f;
+    [SerializeField]
+    private float thrusterFuelBurnSpeed = 1f;
+    [SerializeField]
+    private float thrusterRegenSpd = 0.4f;
+    private float thrusterFuelAmount = 1f;
+
+    public float GetThrusterFuelAmount()
+    {
+        return thrusterFuelAmount;
+    }
 
     [Header("jump settings:")]
     [SerializeField]
@@ -80,7 +90,7 @@ public class PlayerController : NetworkBehaviour {
     //PlayerControllerMethods
     private void SetJointSettings(float _jointSpring)
     {
-        joint.yDrive = new JointDrive { positionSpring = jointJump, maximumForce = jointForceMax };
+        joint.yDrive = new JointDrive { positionSpring = _jointSpring, maximumForce = jointForceMax };
     }
 
     //PlayerShootMethods
@@ -105,6 +115,17 @@ public class PlayerController : NetworkBehaviour {
             //create playerUI
             playerUIInstance = Instantiate(playerUI);
             playerUIInstance.name = playerUI.name;
+
+            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+            if (ui == null)
+            {
+                Debug.LogError("No playerUI component on PlayerUI prefab");
+
+            }
+            else
+            {
+                ui.SetController(GetComponent<PlayerController>());
+            }
             GetComponent<Player>().Setup();
         }
 		
@@ -139,6 +160,17 @@ public class PlayerController : NetworkBehaviour {
         {
             Shoot();
         }
+
+        //should correct physics when landing on objects around map or going over
+        RaycastHit _hit;
+        if (Physics.Raycast (transform.position, Vector3.down, out _hit, 100f))
+        {
+            joint.targetPosition = new Vector3(0f, -_hit.point.y, 0f);
+        }
+        else
+        {
+            joint.targetPosition = new Vector3(0f, 0f, 0f);
+        }
 		
 		//PlayerControllerUpdate
 		//3d movement vector
@@ -169,14 +201,24 @@ public class PlayerController : NetworkBehaviour {
         Vector3 _flyForce = Vector3.zero;
 
         //jump force
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && thrusterFuelAmount > 0f)
+            //flying
         {
-            _flyForce = Vector3.up * flyForceController;
-            SetJointSettings(0f);
+            thrusterFuelAmount -= thrusterFuelBurnSpeed * Time.deltaTime;
+
+            if (thrusterFuelAmount >= 0.01f)
+            {
+                _flyForce = Vector3.up * flyForceController;
+                SetJointSettings(0f);
+            }
+
         }else
+        //not flying
         {
+            thrusterFuelAmount += thrusterRegenSpd * Time.deltaTime;
             SetJointSettings(jointJump);
         }
+        thrusterFuelAmount = Mathf.Clamp(thrusterFuelAmount, 0, 1);
 
         this.UseFly(_flyForce);
     }

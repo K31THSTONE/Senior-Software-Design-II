@@ -123,11 +123,14 @@ public class Player : NetworkBehaviour {
 
         currentHp = maxHp;
         isDead = false;
-
+        //enable components
         for (int i = 0; i < disableOnDead.Length; i++)
         {
             disableOnDead[i].enabled = wasEnabled[i];
         }
+
+        //enable gameobjects
+        //enables collider
         Collider _col = GetComponent<Collider>();
         if (_col != null)
         {
