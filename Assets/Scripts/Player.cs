@@ -3,8 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Collections;
 
-public class Player : NetworkBehaviour {
-
+public class Player : NetworkBehaviour { 
 
     private bool _isDead = false;
     public bool lost = false;

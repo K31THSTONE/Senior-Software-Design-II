@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 	
 	//PlayerShootFields
-	 private const string PLAYER_TAG = "Player";
+	private const string PLAYER_TAG = "Player";
     [SerializeField]
     private PlayerWeapons weapon = new PlayerWeapons();
 

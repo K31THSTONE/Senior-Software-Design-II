@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22aa88c6458a1ef47857e9629d5f7c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lost: 0
   deaths: 0
   maxHp: 100
   disableOnDead:
