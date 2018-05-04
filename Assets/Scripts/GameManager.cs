@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 
     private const string PLAYER_ID_PREFIX = "Player ";
 
-    private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    public static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
     public static void RegisterPlayer (string _netID, Player _player)
     {
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
         return players[_playerID];
     }
 
-    /*void OnGUI()
+    void OnGUI()
     {
         GUILayout.BeginArea(new Rect(250, 250, 250, 500));
         GUILayout.BeginVertical();
@@ -51,5 +51,4 @@ public class GameManager : MonoBehaviour {
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
-*/
 }

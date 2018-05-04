@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking.Match;
+using UnityEngine.Networking;
 
-public class PlayerUI : MonoBehaviour {
+public class PlayerUI : NetworkBehaviour {
 
     [SerializeField]
     GameObject pauseMenu;
@@ -39,5 +41,23 @@ public class PlayerUI : MonoBehaviour {
         //gets current state, enable/disable pause
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         PauseMenu.IsOn = pauseMenu.activeSelf;
+    }
+
+    public void endGame()
+    {
+        if(GameManager.GetPlayer(name).deaths == 1)
+        {
+            NetworkManager netMang = new NetworkManager();
+            MatchInfo matchInfo = netMang.matchInfo;
+            netMang.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, netMang.OnDropConnection);
+            netMang.StopHost();
+        }
+        else
+        {
+            NetworkManager netMang = new NetworkManager();
+            MatchInfo matchInfo = netMang.matchInfo;
+            netMang.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, netMang.OnDropConnection);
+            netMang.StopHost();
+        }
     }
 }

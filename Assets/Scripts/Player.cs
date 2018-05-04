@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
 using System.Collections;
 
 public class Player : NetworkBehaviour { 
@@ -82,8 +83,6 @@ public class Player : NetworkBehaviour {
                 //end of game routine
                 Debug.Log(transform.name + "has lost");
                 lost = true;
-                this.endGame();
-
             }
             else
             {
@@ -143,14 +142,6 @@ public class Player : NetworkBehaviour {
         if (_col != null)
         {
             _col.enabled = true;
-        }
-    }
-
-    public void endGame()
-    {
-        if(this.lost == true)
-        {
-            SceneManager.LoadScene("LobbyScene");
         }
     }
 

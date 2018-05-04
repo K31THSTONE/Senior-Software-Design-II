@@ -39,6 +39,7 @@ public class PlayerController : NetworkBehaviour {
     GameObject playerGraphics;
     [SerializeField]
     GameObject playerUI;
+    PlayerUI ui;
     private GameObject playerUIInstance;
 
     Camera sceneCamera;
@@ -116,7 +117,7 @@ public class PlayerController : NetworkBehaviour {
             playerUIInstance = Instantiate(playerUI);
             playerUIInstance.name = playerUI.name;
 
-            PlayerUI ui = playerUIInstance.GetComponent<PlayerUI>();
+            ui = playerUIInstance.GetComponent<PlayerUI>();
             if (ui == null)
             {
                 Debug.LogError("No playerUI component on PlayerUI prefab");
@@ -244,13 +245,34 @@ public class PlayerController : NetworkBehaviour {
 
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
-        if(_player.dead == true)
+        if (_player.lost == true)
         {
-            shot.kills++;
+            if (_playerID == "Player 1")
+            {
+                Player playerThatShot = GameManager.GetPlayer("Player 2");
+                Player playerThatGotShot = GameManager.GetPlayer("Player 1");
+                PlayerController[] shootingPlayerUI = playerThatShot.GetComponents<PlayerController>();
+                PlayerController[] shotPlayerUI = playerThatGotShot.GetComponents<PlayerController>();
+                shootingPlayerUI[0].ui.endGame();
+                shotPlayerUI[0].ui.endGame();
+                Debug.Log(shot + "Has Won");
+            }
+            else
+            {
+                Player playerThatShot = GameManager.GetPlayer("Player 1");
+                Player playerThatGotShot = GameManager.GetPlayer("Player 2");
+                PlayerController[] shootingPlayerUI = playerThatShot.GetComponents<PlayerController>();
+                PlayerController[] shotPlayerUI = playerThatGotShot.GetComponents<PlayerController>();
+                shootingPlayerUI[0].ui.endGame();
+                shotPlayerUI[0].ui.endGame();
+                Debug.Log(shot + "Has Won");
+            }
         }
-        else if(_player.lost == true)
+        else if(_player.isDead == true)
         {
-            Debug.log(shot.name + "has Won");
+            Player playerThatShot = GameManager.GetPlayer(shot);
+            playerThatShot.kills++;
+            Debug.Log(playerThatShot.name + "Has gotten a kill");
         }
     }
 	//PlayerSetupMethods
