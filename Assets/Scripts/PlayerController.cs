@@ -159,8 +159,7 @@ public class PlayerController : NetworkBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            string name = this.playerUIInstance.name;
-            Shoot(name);
+            Shoot();
         }
 
         //should correct physics when landing on objects around map or going over
@@ -266,10 +265,6 @@ public class PlayerController : NetworkBehaviour {
                 _player.EndGame();
                 _player1.EndGame();
             }
-        }
-        else if (_playerID == "Player 2")
-        {
-
         }
     }
 	//PlayerSetupMethods
