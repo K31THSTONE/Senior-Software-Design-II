@@ -8,7 +8,7 @@ using UnityEngine.Networking.Match;
 public class JoinGame : MonoBehaviour {
 
     List<GameObject> roomList = new List<GameObject>();
-    private NetworkManager networkManager;
+    public NetworkManager networkManager;
     [SerializeField]
     private Text status;
     [SerializeField]

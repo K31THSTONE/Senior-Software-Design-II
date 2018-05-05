@@ -80,23 +80,24 @@ public class Player : NetworkBehaviour {
             deaths++;
             if (deaths == 1)
             {
-                lost = true;
-                isDead = true;
+                this.lost = true;
+                this.isDead = true;
+                this.Die();
             }
             else
             {
-                Die();
+                this.Die();
             }
         }
     }
     private void Die()
     {
-        isDead = true;
+        this.isDead = true;
 
         //disable components
         for (int i = 0; i < disableOnDead.Length; i++)
         {
-            disableOnDead[i].enabled = false;
+            this.disableOnDead[i].enabled = false;
         }
 
         Collider _col = GetComponent<Collider>();
@@ -127,12 +128,12 @@ public class Player : NetworkBehaviour {
     public void SetDefaults ()
     {
 
-        currentHp = maxHp;
-        isDead = false;
+        this.currentHp = maxHp;
+        this.isDead = false;
         //enable components
         for (int i = 0; i < disableOnDead.Length; i++)
         {
-            disableOnDead[i].enabled = wasEnabled[i];
+            this.disableOnDead[i].enabled = this.wasEnabled[i];
         }
 
         //enable gameobjects
@@ -146,7 +147,7 @@ public class Player : NetworkBehaviour {
 
     public void EndGame()
     {
-        NetworkManager networkManager = new NetworkManager();
+        NetworkManager networkManager = NetworkManager.singleton;
         MatchInfo matchInfo = networkManager.matchInfo;
         networkManager.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, networkManager.OnDropConnection);
         networkManager.StopHost();

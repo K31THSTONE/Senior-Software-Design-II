@@ -240,46 +240,46 @@ public class PlayerController : NetworkBehaviour {
     [Command]
     void CmdPlayerShot (string _playerID, int _damage)
     {
-        Debug.Log(_playerID + "has been shot");
+        Debug.Log(_playerID + " has been shot");
 
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
-        if (_player.name == "Player 1")
+
+        if (_player.lost)
         {
-            if (_player.lost == true)
+            if(_player.name == "Player 1")
             {
-                Debug.Log(_player.name + "Has Won");
-                Debug.Log("Player 2 Has Lost");
-                Player _player1 = GameManager.GetPlayer("Player 2");
+                Debug.Log(_player.name + " has Lost");
+                Debug.Log("Player 2 has Won");
+                string idd = "Player 2";
+                Player _player1 = GameManager.GetPlayer(idd);
                 _player.EndGame();
                 _player1.EndGame();
             }
             else
             {
-                if (_player.isDead)
-                {
-                    Player _player1 = GameManager.GetPlayer("Player 2");
-                    _player1.kills++;
-                }
+                Debug.Log(_player.name + " has Lost");
+                Debug.Log("Player 1 has Won");
+                string idd = "Player 1";
+                Player _player1 = GameManager.GetPlayer(idd);
+                _player.EndGame();
+                _player1.EndGame();
+
             }
         }
-        else if (_player.name == "Player 2") ;
+        else
         {
-            if (_player.lost == true)
+            if (_player.name == "Player 1")
             {
-                Debug.Log(_player.name + "Has Won");
-                Debug.Log("Player 1 Has Lost");
-                Player _player1 = GameManager.GetPlayer("Player 1");
-                _player.EndGame();
-                _player1.EndGame();
+                string idd = "Player 2";
+                Player _player1 = GameManager.GetPlayer(idd);
+                _player1.kills++;
             }
             else
             {
-                if (_player.isDead)
-                {
-                    Player _player1 = GameManager.GetPlayer("Player1");
-                    _player1.kills++;
-                }
+                string idd = "Player 1";
+                Player _player1 = GameManager.GetPlayer(idd);
+                _player1.kills++;
             }
         }
     }
