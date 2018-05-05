@@ -254,6 +254,14 @@ public class PlayerController : NetworkBehaviour {
                 _player.EndGame();
                 _player1.EndGame();
             }
+            else
+            {
+                if (_player.isDead)
+                {
+                    Player _player1 = GameManager.GetPlayer("Player 2");
+                    _player1.kills++;
+                }
+            }
         }
         else
         {
@@ -264,6 +272,14 @@ public class PlayerController : NetworkBehaviour {
                 Player _player1 = GameManager.GetPlayer("Player 1");
                 _player.EndGame();
                 _player1.EndGame();
+            }
+            else
+            {
+                if (_player.isDead)
+                {
+                    Player _player1 = GameManager.GetPlayer("Player1");
+                    _player1.kills++;
+                }
             }
         }
     }
