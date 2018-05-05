@@ -244,11 +244,11 @@ public class PlayerController : NetworkBehaviour {
 
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
-        if (_playerID == "Player 1")
+        if (_player.name == "Player 1")
         {
             if (_player.lost == true)
             {
-                Debug.Log(_playerID + "Has Won");
+                Debug.Log(_player.name + "Has Won");
                 Debug.Log("Player 2 Has Lost");
                 Player _player1 = GameManager.GetPlayer("Player 2");
                 _player.EndGame();
@@ -263,11 +263,11 @@ public class PlayerController : NetworkBehaviour {
                 }
             }
         }
-        else
+        else if (_player.name == "Player 2") ;
         {
             if (_player.lost == true)
             {
-                Debug.Log(_playerID + "Has Won");
+                Debug.Log(_player.name + "Has Won");
                 Debug.Log("Player 1 Has Lost");
                 Player _player1 = GameManager.GetPlayer("Player 1");
                 _player.EndGame();

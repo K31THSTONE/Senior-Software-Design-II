@@ -81,6 +81,7 @@ public class Player : NetworkBehaviour {
             if (deaths == 1)
             {
                 lost = true;
+                isDead = true;
             }
             else
             {
