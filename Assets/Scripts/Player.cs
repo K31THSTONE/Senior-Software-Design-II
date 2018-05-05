@@ -80,8 +80,6 @@ public class Player : NetworkBehaviour {
             deaths++;
             if (deaths == 1)
             {
-                //end of game routine
-                Debug.Log(transform.name + "has lost");
                 lost = true;
             }
             else
@@ -143,6 +141,14 @@ public class Player : NetworkBehaviour {
         {
             _col.enabled = true;
         }
+    }
+
+    public void EndGame()
+    {
+        NetworkManager networkManager = new NetworkManager();
+        MatchInfo matchInfo = networkManager.matchInfo;
+        networkManager.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, networkManager.OnDropConnection);
+        networkManager.StopHost();
     }
 
 }

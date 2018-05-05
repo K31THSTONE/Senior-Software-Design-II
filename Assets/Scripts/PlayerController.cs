@@ -226,53 +226,50 @@ public class PlayerController : NetworkBehaviour {
     }
 
     [Client]
-    void Shoot (string name)
+    void Shoot ()
     {
         RaycastHit _hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.getRng(), mask) )
         {
             if (_hit.collider.tag == PLAYER_TAG)
             {
-                CmdPlayerShot(name, _hit.collider.name, weapon.getDmg());
+                CmdPlayerShot(_hit.collider.name, weapon.getDmg());
             }
         }
     }
 
     [Command]
-    void CmdPlayerShot (string shot, string _playerID, int _damage)
+    void CmdPlayerShot (string _playerID, int _damage)
     {
         Debug.Log(_playerID + "has been shot");
 
         Player _player = GameManager.GetPlayer(_playerID);
         _player.RpcTakeDamage(_damage);
-        if (_player.lost == true)
+        if (_playerID == "Player 1")
         {
-            if (_playerID == "Player 1")
+            if (_player.lost == true)
             {
-                Player playerThatShot = GameManager.GetPlayer("Player 2");
-                Player playerThatGotShot = GameManager.GetPlayer("Player 1");
-                PlayerController[] shootingPlayerUI = playerThatShot.GetComponents<PlayerController>();
-                PlayerController[] shotPlayerUI = playerThatGotShot.GetComponents<PlayerController>();
-                shootingPlayerUI[0].ui.endGame();
-                shotPlayerUI[0].ui.endGame();
-                Debug.Log(shot + "Has Won");
-            }
-            else
-            {
-                Player playerThatShot = GameManager.GetPlayer("Player 1");
-                Player playerThatGotShot = GameManager.GetPlayer("Player 2");
-                PlayerController[] shootingPlayerUI = playerThatShot.GetComponents<PlayerController>();
-                PlayerController[] shotPlayerUI = playerThatGotShot.GetComponents<PlayerController>();
-                shootingPlayerUI[0].ui.endGame();
-                shotPlayerUI[0].ui.endGame();
-                Debug.Log(shot + "Has Won");
+                Debug.Log(_playerID + "Has Won");
+                Debug.Log("Player 2 Has Lost");
+                Player _player1 = GameManager.GetPlayer("Player 2");
+                _player.EndGame();
+                _player1.EndGame();
             }
         }
-        else if(_player.isDead == true)
+        else
         {
-            Player playerThatShot = GameManager.GetPlayer(shot);
-            playerThatShot.kills++;
-            Debug.Log(playerThatShot.name + "Has gotten a kill");
+            if (_player.lost == true)
+            {
+                Debug.Log(_playerID + "Has Won");
+                Debug.Log("Player 1 Has Lost");
+                Player _player1 = GameManager.GetPlayer("Player 1");
+                _player.EndGame();
+                _player1.EndGame();
+            }
+        }
+        else if (_playerID == "Player 2")
+        {
+
         }
     }
 	//PlayerSetupMethods
