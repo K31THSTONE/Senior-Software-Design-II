@@ -267,7 +267,7 @@ public class PlayerController : NetworkBehaviour {
 
             }
         }
-        else
+        else if (_player.isDead)
         {
             if (_player.name == "Player 1")
             {
