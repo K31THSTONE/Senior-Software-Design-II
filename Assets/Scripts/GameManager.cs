@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour {
     public static void RegisterPlayer (string _netID, Player _player)
     {
         string _playerID = PLAYER_ID_PREFIX + _netID;
+        Debug.Log(_playerID + " is about to be added");
         players.Add(_playerID, _player);
+        Debug.Log(_playerID + " has been added to dictionary");
         _player.transform.name = _playerID;
     }
 
@@ -33,8 +35,12 @@ public class GameManager : MonoBehaviour {
         players.Remove(_playerID);
     }
 
-    public static Player GetPlayer ( string _playerID)
+    public static Player GetPlayer (string _playerID)
     {
+        if (!players.ContainsKey(_playerID))
+        {
+            Debug.Log(_playerID + "doesn't exist in the key array");
+        }
         return players[_playerID];
     }
 

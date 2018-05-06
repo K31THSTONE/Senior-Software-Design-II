@@ -299,6 +299,7 @@ public class PlayerController : NetworkBehaviour {
         base.OnStartClient();
 
         string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Debug.Log(_netID + " is the net ID");
         Player _player = GetComponent<Player>();
         GameManager.RegisterPlayer(_netID, _player);
     }

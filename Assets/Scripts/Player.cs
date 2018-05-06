@@ -33,12 +33,12 @@ public class Player : NetworkBehaviour {
     public void Setup()
     {
 
-        CmdJoinNewPlayerSetup();
+        this.CmdJoinNewPlayerSetup();
     }
 
     private void CmdJoinNewPlayerSetup()
     {
-        RpcSetupPlayerOnAllInstances();
+        this.RpcSetupPlayerOnAllInstances();
     }
 
     [ClientRpc]
@@ -71,13 +71,13 @@ public class Player : NetworkBehaviour {
         {
             return;
         }
-        currentHp -= _amount;
+        this.currentHp -= _amount;
 
-        Debug.Log(transform.name + " has " + currentHp + " health");
+        Debug.Log(transform.name + " has " + this.currentHp + " health");
 
         if (currentHp <= 0)
         {
-            deaths++;
+            this.deaths++;
             if (deaths == 1)
             {
                 this.lost = true;
@@ -107,16 +107,16 @@ public class Player : NetworkBehaviour {
         Debug.Log(transform.name + " is dead");
 
         //call respawning
-        StartCoroutine(Respawn());
+        StartCoroutine(Respawn(this));
     }
 
     //coroutine basically for respawning the player
-    private IEnumerator Respawn ()
+    private IEnumerator Respawn (Player player)
     {
         //directs to the variable within the round setting script
         yield return new WaitForSeconds(GameManager.gameInstance.roundSettings.respawnTimer);
 
-        SetDefaults();
+        player.SetDefaults();
         //will return one of the fixed spawn/start points in our game
         Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = _spawnPoint.position;
